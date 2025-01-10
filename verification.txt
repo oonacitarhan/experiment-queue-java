@@ -1,0 +1,5 @@
+Actual verification date: 2026-11-01
+Command: java ExperimentQueue.java
+
+[baseline, dataset, train, evaluate]
+Self-tests passed
