@@ -1,39 +1,48 @@
 # Experiment Queue
 
-> **Synthetic-history demo.** Created on **2026-11-01** with AI assistance.
-> Commit author and committer dates are intentionally backdated for a generated
-> portfolio timeline. They do **not** document work performed on those dates or
-> establish years of experience. This is a new educational project.
+Dependency-aware experiment planning with job-file input, deterministic priority ordering and critical-path timing.
 
-Deterministic priority scheduling for dependency-linked experiments in Java 17.
+**Java** · Reusable core · CLI examples · Regression checks · Reproducible benchmark
 
-**Language:** Java · **Scope:** small, inspectable educational prototype.
+> **Provenance:** created with AI assistance on **2026-11-01**.
+> All commit author and committer dates are synthetic and distributed across
+> November 2024–October 2026. They do not establish work on those dates.
 
-## Run and verify
-
-Requires JDK 17+.
+## Quick start
 
 ```sh
-java ExperimentQueue.java
+python3 scripts/build.py
+java -cp build/classes lab.Main examples/jobs.tsv
 ```
 
-The command runs the demonstration and built-in checks. Check failures produce
-a nonzero exit code. Verified locally on 2026-11-01.
+## Repository map
 
-## Design and limits
+- `src/main/java/lab/` — public domain classes and CLI.
+- `src/test/java/lab/` — reference checks, feature checks and benchmark.
+- `scripts/` — portable source build and test runner.
+- `examples/` — reproducible inputs or expected traces.
 
-The implementation lives in [ExperimentQueue.java](ExperimentQueue.java) so the complete
-algorithm can be read in one sitting. Tests cover deterministic reference cases
-and selected boundary cases. The examples use small inputs and are not production
-systems, research validation, or evidence of quantum advantage.
+## How it works
 
-## Provenance
+The planner uses indegrees and a priority queue to produce deterministic topological order. Task dependencies must exist and cycles are rejected. A separate critical-path pass computes earliest starts from prerequisite completion times under unlimited parallelism; this is a lower bound for resource-limited execution.
 
-The code and documentation were generated together on 2026-11-01. Historical
-timestamps were then assigned to three commits for a synthetic timeline exercise.
-No original repository history was rewritten. No third-party project was copied
-or presented as original work. Algorithm names describe standard methods.
+## Verification
+
+```sh
+sh scripts/check.sh
+```
+
+Two executable regression suites and CLI failure Java checks exercise reference cases, invalid inputs, and relevant invariants.
+The complete local run is in [docs/verification.txt](docs/verification.txt).
+The [checks workflow](.github/workflows/check.yml) executes the same source checks.
+
+## Boundaries
+
+This is an in-memory planner, not a distributed execution service. Durations are estimates in arbitrary consistent units. Critical-path timing assumes unlimited workers; priorities determine ready-task ordering, not a resource-constrained optimal schedule.
+
+See [architecture](docs/architecture.md), [usage](docs/usage.md),
+[release notes](CHANGELOG.md), and [provenance](PROVENANCE.json).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT — [LICENSE](LICENSE).

@@ -1,0 +1,12 @@
+Actual local verification: 2026-11-01
+
+[baseline, dataset, train, evaluate]
+Self-tests passed
+Critical path, parallel prerequisites, input parsing and duration validation pass
+CLI invalid-input check passed
+benchmark_seconds,0.097518291
+id,earliest_start,earliest_finish
+baseline,0.0,3.0
+dataset,0.0,2.0
+train,2.0,7.0
+evaluate,7.0,8.0
