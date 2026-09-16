@@ -6,3 +6,8 @@ for name in ['ReferenceTest','FeatureTest']:
 result=subprocess.run([java,'-cp',str(root/'build/classes'),'lab.Main','--invalid'],cwd=root,capture_output=True)
 assert result.returncode==2
 print('CLI invalid-input check passed')
+
+args=['examples/jobs.tsv']
+result=subprocess.run([java,'-cp',str(root/'build/classes'),'lab.Main',*args],cwd=root,text=True,capture_output=True,check=True)
+assert 'evaluate,7.0,8.0' in result.stdout
+print('Job-file CLI critical-path output passed')
