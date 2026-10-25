@@ -4,7 +4,8 @@ Actual local verification: 2026-11-01
 Self-tests passed
 Critical path, parallel prerequisites, input parsing and duration validation pass
 CLI invalid-input check passed
-benchmark_seconds,0.097518291
+Job-file CLI critical-path output passed
+benchmark_seconds,0.114794431
 id,earliest_start,earliest_finish
 baseline,0.0,3.0
 dataset,0.0,2.0
